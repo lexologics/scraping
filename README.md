@@ -1,4 +1,10 @@
 # README.md
 ### web scraping
 
-create virtual environment
+create virtual environment:
+mkdir ~/src
+mkdir ~/src/scrape
+cd ~/src/scrape
+
+
+

@@ -13,6 +13,14 @@ saved_domains = {
         'tag': 'div',
         'class': 'container'
         },
+    'kwf.nl': {
+        'tag': 'div',
+        'class': 'dialog-off-canvas-main-canvas'
+        },        
+    'ginopisa.nl': {
+        'tag': 'div',
+        'class': 'hfeed site'
+    },
     'joincfe.com': {
         'tag': 'div',
         'class': 'main-container'
@@ -108,6 +116,10 @@ def get_domain_name(url):
     return urlparse(url).netloc
 
 
+def get_path_name(url):
+    return urlparse(url).path
+
+
 def get_url_lookup_class(url):
     domain_name = get_domain_name(url)
     lookup_class = {}
@@ -121,6 +133,28 @@ def get_content_data(soup, url):
     if lookup_dict is None:
         return soup.find('body').text
     return soup.find(lookup_dict['tag'], {'class': lookup_dict['class']})
+
+
+def parse_links(soup):
+    a_tags = soup.find_all('a', href=True)
+    print(a_tags)
+    links = []
+    for a in a_tags:
+        link = a['href']
+        links.append(link)
+    return links
+
+
+def clean_local_links(soup, url):
+    links = parse_links(soup)  # list of links
+    local_links = []
+    domain_name = get_domain_name(url)
+    for link in links:
+        print(link)
+        link_domain = get_domain_name(link)
+        if link_domain == domain_name:
+            local_links.append(link)
+    return local_links
 
 
 def end_program():
@@ -137,8 +171,11 @@ def main():
     response_html = response.text
     #print(response_html)
     soup = soupify(response_html)
-    html_text = get_content_data(soup, url)
-    print(html_text)
+    html_soup = get_content_data(soup, url)
+    #print(html_text)
+    links = clean_local_links(html_soup, url)
+    print(links)
+
 
 
 main()

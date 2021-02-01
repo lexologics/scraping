@@ -100,10 +100,12 @@ else:
     else:
         body_ = soup.find_all(my_html_tag)
         print('\nFind', len(body_), f'objects in the list for the <{my_html_tag}> tag')
+
     words = body_.text.split()
     clean_words = clean_up_words(words)
     word_counts = Counter(clean_words)
     print(word_counts.most_common(30))  
+    
     filename = domain.replace('.', '-') + '.csv'
     path = 'csv/' + filename
     time_stamp = datetime.datetime.now()

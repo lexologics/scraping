@@ -3,7 +3,8 @@ import re
 
 # https://www.youtube.com/playlist?list=LLiVqIj4D1NNP22w_GidsiUg
 search_keyword = 'lexologics'
-playlist = 'LLiVqIj4D1NNP22w_GidsiUg'
+#playlist = 'LLiVqIj4D1NNP22w_GidsiUg'
+playlist = 'PLZwydrfglOlZCSGAWyqLbsCym-Ow45bwW'
 
 url = 'https://www.youtube.com/results?search_query=' + search_keyword
 url2 = 'https://www.youtube.com/playlist?list=' + playlist
@@ -40,3 +41,4 @@ print(int(len(video_search)))
 print(int(len(video_playlist)))
 print(int(len(video_watch)))
 print(url2)
+print(video_search)

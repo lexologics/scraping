@@ -1,29 +1,19 @@
 scrapy shell
 
-fetch('https://www.mitra.nl/webshop/groep/whisky/99-48-6C-B7-61-C4-31-A6')
-#response
+fetch('<URL>')
+response
 
-#response.css('div.product-info').get()
 
-#products.css('span.product-name,a').get()
-#products.css('span.product-name::text').get()
+#For Mitra Wiskey:
+product_name = response.xpath('//span[@class="product-name"]/a/h2/text()').get()
+product_name_content = response.xpath('//span[@class="product-name"]/a/h3/text()').get()
+product_price_euro = response.xpath('//span[@class="vrkpr"]/text()').get().replace('.', '')
+product_price_cents = response.xpath('//span[@class="cents"]/text()').get()
+product_available = response.xpath('//div[@class="product-buttons"]/a/text()').get()
 
-products = response.css('div.product-info,span.h2').getall()
-product_price_euro = response.css('span.vrkpr').getall()
-product_price_cents = response.css('span.cents').getall()
-product_contents = response.css('span.product-content').getall()
-
-print(response.css('span.product-name,a::text').get())
-print(response.css('span.product-name,a').attrib['href'])
 
 # out the scrapy shell, into the whiskeyscraper folder
-# run the project
+# RUN THE PROJECT
 scrapy crawl whiskey
 scrapy crawl whiskey -O whiskey.json
-
-
-
-response.css('span.product-content,span.a::attr(href)').extract() 
-
-
 
